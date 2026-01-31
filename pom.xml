@@ -30,6 +30,13 @@
         </dependency>
     </dependencies>
 
+    <configuration>
+        <excludes>
+            <!-- Exclude logger statements if needed -->
+            <exclude>**/App.class</exclude>
+        </excludes>
+    </configuration>
+
     <build>
         <plugins>
             <plugin>
