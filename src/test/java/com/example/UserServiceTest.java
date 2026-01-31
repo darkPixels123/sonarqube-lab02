@@ -13,6 +13,7 @@ class UserServiceTest {
         // Even if the DB connection fails due to environment, 
         // calling the method attempts to cover the lines.
         assertThrows(Exception.class, () -> service.findUser("testUser"));
+        assertThrows(Exception.class, () -> service.deleteUser("testUser"));
     }
 
     @Test
