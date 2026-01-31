@@ -8,19 +8,20 @@ import java.sql.SQLException;
 public class UserService {
 
     private static final String PASSWORD = System.getenv("DB_PASSWORD");
+    private static final String DB_USER = System.getenv("DB_USER");
 
     public void findUser(String username) throws SQLException {
-        String sql = "SELECT id, name, email FROM users WHERE name = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/db", "root", PASSWORD); PreparedStatement st = conn.prepareStatement(sql)) {
+        String query = "SELECT id, name, email FROM users WHERE name = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/db", DB_USER, PASSWORD); PreparedStatement st = conn.prepareStatement(query)) {
             st.setString(1, username);
             st.executeQuery();
         }
     }
 
     public void deleteUser(String username) throws SQLException {
-        // SECURITY FIX: In a real app, add an 'isAdmin' check here
-        String sql = "DELETE FROM users WHERE name = ?";
-        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/db", "root", PASSWORD); PreparedStatement st = conn.prepareStatement(sql)) {
+        // STRIDE Mitigation: In a real app, add an Authorization check here!
+        String query = "DELETE FROM users WHERE name = ?";
+        try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/db", DB_USER, PASSWORD); PreparedStatement st = conn.prepareStatement(query)) {
             st.setString(1, username);
             st.execute();
         }
