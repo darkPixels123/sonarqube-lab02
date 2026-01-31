@@ -36,6 +36,7 @@
             <exclude>**/App.class</exclude>
         </excludes>
     </configuration>
+    
 
     <build>
         <plugins>
