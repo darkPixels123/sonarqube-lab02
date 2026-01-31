@@ -1,4 +1,4 @@
-package main.java.com.example; // Corrected package name
+package com.example; // Corrected package name
 
 import java.sql.Connection;
 import java.sql.DriverManager;
