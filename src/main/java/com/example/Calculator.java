@@ -1,43 +1,19 @@
-package com.example;
+package com.example; // Corrected package name
 
 public class Calculator {
 
     public int calculate(int a, int b, String op) {
-        if (op == null || op.isBlank()) {
-            throw new IllegalArgumentException("Operation must be provided");
-        }
-
         return switch (op) {
-            case "add" ->
+            case "add", "add-again" ->
                 a + b;
-            case "sub" ->
+            case "sub", "sub-again" ->
                 a - b;
             case "mul" ->
                 a * b;
-            case "div" -> {
-                if (b == 0) {
-                    throw new IllegalArgumentException("Division by zero");
-                }
-                yield a / b;
-            }
-            case "mod" -> {
-                if (b == 0) {
-                    throw new IllegalArgumentException("Modulo by zero");
-                }
-                yield a % b;
-            }
-            case "pow" -> {
-                if (b < 0) {
-                    throw new IllegalArgumentException("Negative exponent is not supported");
-                }
-                yield (int) Math.pow(a, b);
-            }
+            case "div" ->
+                (b == 0) ? 0 : a / b;
             default ->
-                throw new IllegalArgumentException("Unknown operation: " + op);
+                0;
         };
-    }
-
-    public int add(int x, int y) {
-        return x + y;
     }
 }

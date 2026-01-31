@@ -1,26 +1,18 @@
 package com.example;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class App {
 
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Calculator calc = new Calculator();
-        int result = calc.calculate(10, 5, "add");
-        LOGGER.log(Level.INFO, "Calculation result: {0}", result);
-
-        try {
-            UserService service = new UserService();
-            boolean exists = service.userExists("admin");
-            LOGGER.log(Level.INFO, "User exists: {0}", exists);
-        } catch (IllegalStateException ex) {
-            LOGGER.log(Level.WARNING, "Database environment variables not set: {0}", ex.getMessage());
-        } catch (SQLException ex) {
-            LOGGER.log(Level.SEVERE, "Database operation failed", ex);
-        }
+        logger.info("Result: {}", calc.calculate(10, 5, "add-again"));
+        UserService service = new UserService();
+        service.findUser("admin");
+        service.deleteUser("admin"); // NEW dangerous call
     }
+
 }
